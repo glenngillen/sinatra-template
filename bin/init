@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ "$1" == "-h" ]; then
+  echo "Usage: `basename $0` path/to/new/app"
+  exit 0
+fi
+
+APP_ROOT="$(dirname "$(dirname "$(readlink "$0")")/../")"
+NEW_APP_ROOT="$1"
+printf "Setting up new app... "
+mkdir -p $NEW_APP_ROOT
+cp -r $APP_ROOT $NEW_APP_ROOT
+rm -rf "$NEW_APP_ROOT/.git"
+printf "done.\n"
+echo "Created a new Sintara app at $NEW_APP_ROOT."
